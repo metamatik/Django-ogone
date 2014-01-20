@@ -66,15 +66,15 @@ class Ogone(object):
     @classmethod
     def get_data(cls, data, settings=ogone_settings):
         # Check for obligatory fields
-        assert 'language' in data
-        assert 'orderID' in data
-        assert 'amount' in data
+        assert 'LANGUAGE' in data
+        assert 'ORDERID' in data
+        assert 'AMOUNT' in data
         # Make sure amount is an int
-        assert isinstance(data['amount'], (int, long)) or data['amount'].isdigit()
+        assert isinstance(data['AMOUNT'], (int, long)) or data['AMOUNT'].isdigit()
 
-        data['currency'] = data.get('currency') or settings.CURRENCY
-        data['PSPID'] = settings.PSPID
-        data['SHASign'] = cls.sign(data, settings=settings)
+        data['CURRENCY'] = data.get('CURRENCY') or settings.CURRENCY
+        data['PSPID'] = data.get('PSPID') or settings.PSPID
+        data['SHASIGN'] = cls.sign(data, settings=settings)
 
         return data
 
